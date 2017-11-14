@@ -37,7 +37,9 @@ class UbuntuIntfMgmt(object):
                            intf_save_file=None, read_only=True):
         """ extract the configuration for a specific interface
         """
-        src_file = "/etc/network/interfaces"
+        src_file = "/etc/network/interfaces.d/50-cloud-init.cfg"
+        if not os.path.exists(src_file):
+            src_file = "/etc/network/interfaces"
         back_file = "/tmp/cp_interfaces_file.{dt}".format(
             dt=datetime.now().strftime("%m%d%Y%H%M%S"))
         if backup:
